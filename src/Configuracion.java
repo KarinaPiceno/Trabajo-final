@@ -1,6 +1,6 @@
 public interface Configuracion {
-    public void modificarNombre();
-    public void modificarEdad();
-    public void modificarTelefono();
-    public void modificarDireccion();
+    public void modificarNombre(String nombre); //Metodo por implementar por clases que heredan Configuracion para modificar el nombre
+    public void modificarEdad(int edad); //Metodo por implementar por clases que heredan Configuracion para modificar la edad
+    public void modificarTelefono(int telefono); //Metodo por implementar por clases que heredan Configuracion para modificar el telefono
+    public void modificarDireccion(String direccion); //Metodo por implementar por clases que heredan Configuracion para modificar la direccion
 }
