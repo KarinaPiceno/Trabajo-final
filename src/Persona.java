@@ -3,7 +3,8 @@ public abstract class Persona {
     public String nombre; 
     public String apellidoP; 
     public String apellidoM; 
-    public static int ultimold;
+    public static int ultimold=0;
+    public int id;
     public int telefono;
     private String direccion;
     private int edad;
@@ -41,12 +42,12 @@ public abstract class Persona {
 
     public String getNombreCompleto() {
         return nombre + " " + apellidoP + " " + apellidoM;
-    
+    }
     @Override
     public String toString() {
-        return "Persona: " + nombre + " " + apellidoP + " " + apellidoM +
-               "CURP: " + CURP + "Edad: " + edad + "Dirección: " + direccion +
-               "Num.Teléfono: " + telefono;
+        return "Nombre: " + getNombreCompleto() + "\nID: " + id +
+               "\nCURP: " + CURP + "\nEdad: " + edad + "\nDirección: " + direccion +
+               "\nNum.Teléfono: " + telefono;
     }
 
     public boolean equals(Object obj) {
@@ -61,48 +62,10 @@ public abstract class Persona {
 
 
 
-    //getter and setters de nombre
-    public String getNombre() {
-        return nombre;
-    }
-    public void setNombre(String nombre) { 
-        this.nombre = nombre; 
-    }
-    //getter and setters de apellidoP
-    public String getApellidoP() { 
-        return apellidoP; 
-    }
-    public void setApellidoP(String apellidoP) {
-        this.apellidoP = apellidoP; 
-    }
-    //getter and setters de apellidoM
-    public String getApellidoM() { 
-        return apellidoM; 
-    }
-    public void setApellidoM(String apellidoM) { 
-        this.apellidoM = apellidoM; 
-    }
-    //getter and setters de id
-    public final int getId() {
-        return id;
-    }
-    public void setId(int id) {
-        this.id = id;
-    }
-    //getter and setters de ultimoId
-    public static int getUltimald() { 
-        return ultimald; 
-    }
-    public static void setUltimald(int ultimald) {
-        Persona.ultimald = ultimald; 
-    }
-    //getter and setters de telefono
-    public int getTelefono() { 
-        return telefono; 
-    }
-    public void setTelefono(int telefono) {
-         this.telefono = telefono; 
-        }
+   
+   
+   
+    
     //getter and setters de direccion
     public String getDireccion() { 
         return direccion; 
@@ -141,5 +104,5 @@ public abstract class Persona {
 
 
 
-
+    
 }
