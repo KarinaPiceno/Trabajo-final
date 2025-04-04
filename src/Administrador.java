@@ -10,7 +10,7 @@ public class Administrador extends Persona implements Configuracion { //Administ
     }
     @Override
     public void modificarEdad(int edad){ //Metodo implementado de configuracion para modificar la edad
-        this.edad = edad;
+        setEdad(edad);
     }
     @Override
     public void modificarTelefono(int telefono){ //Metodo implementado de configuracion para modificar el telefono
@@ -18,7 +18,7 @@ public class Administrador extends Persona implements Configuracion { //Administ
     }
     @Override
     public void modificarDireccion(String direccion){ //Metodo implementado de configuracion para modificar la direccion
-        this.direccion = direccion;
+        setDireccion(direccion);
     }
     @Override
     public void agregarInvitado(){ //Metodo abstracto heredado de Persona
