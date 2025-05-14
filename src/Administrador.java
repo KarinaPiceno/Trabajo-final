@@ -1,5 +1,8 @@
 public class Administrador extends Persona implements Configuracion { //Administrador es subclase de Persona e implementa la interface Configuracion
 
+    //agregar invitado frecuente
+    //suspender usuario
+
     public Administrador(String nombre, String apellidoP, String apellidoM, String CURP, String direccion, int edad, int telefono){
         super(nombre, apellidoP, apellidoM, CURP, direccion, edad, telefono);
     }
