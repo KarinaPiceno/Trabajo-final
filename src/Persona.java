@@ -4,7 +4,7 @@ public abstract class Persona {
     public String apellidoP; 
     public String apellidoM; 
     public int id;
-    public int telefono;
+    public  String telefono;
     private String direccion;
     private int edad;
     private String key1;
@@ -20,13 +20,13 @@ public abstract class Persona {
         this.direccion = direccion;
         this.edad = edad;
         // Se genera la id de manera secuencial: se incrementa ultimoId y se asigna a id.
-        this.id = Logs.getNusuarios();
-        Logs.setnUsuarios(++id);
+        //this.id = Logs.getNusuarios();
+        //Logs.setnUsuarios(++id);
         }
 
 
     //constructor con nombre, apellido paterno, apellido materno, CURP, direccion, edad y telefono
-    public Persona (String nombre, String apellidoP, String apellidoM, String CURP, String direccion, int edad, int telefono){
+    public Persona (String nombre, String apellidoP, String apellidoM, String CURP, String direccion, int edad, String telefono){
         this.nombre = nombre;
         this.apellidoP = apellidoP;
         this.apellidoM = apellidoM;
