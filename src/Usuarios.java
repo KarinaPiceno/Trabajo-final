@@ -4,8 +4,8 @@ import java.util.stream.Collectors;
 public class Usuarios extends Persona implements Configuracion{
     public boolean permisos[] = {false,false,false,false};
     int tipoUsuario;
-    public Usuarios(String nombre, String apellidoP, String apellidoM, String CURP, String direccion, int edad, String telefono){
-        super(nombre, apellidoP, apellidoM, CURP, direccion, edad, telefono);
+    public Usuarios(String nombre, String apellidoP, String apellidoM, String CURP, String direccion, int edad, String telefono, char identificador){
+        super(nombre, apellidoP, apellidoM, CURP, direccion, edad, telefono, identificador);
         if (edad<18){
             tipoUsuario=0;
             permisos[Permisos.ENTRAR.indice] = true;
@@ -21,8 +21,8 @@ public class Usuarios extends Persona implements Configuracion{
             Logs.agregarUsuario(this);
             }
         }
-         public Usuarios(String nombre, String apellidoP, String apellidoM, String CURP, String direccion, int edad){
-        super(nombre, apellidoP, apellidoM, CURP, direccion, edad);
+         public Usuarios(String nombre, String apellidoP, String apellidoM, String CURP, String direccion, int edad, char identificador){
+        super(nombre, apellidoP, apellidoM, CURP, direccion, edad, identificador);
         if (edad<18){
             tipoUsuario=0;
             permisos[Permisos.ENTRAR.indice] = true;
