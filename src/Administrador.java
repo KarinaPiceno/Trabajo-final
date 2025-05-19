@@ -2,12 +2,26 @@ public class Administrador extends Persona implements Configuracion { //Administ
 
   
 
-    public Administrador(String nombre, String apellidoP, String apellidoM, String CURP, String direccion, int edad, String telefono){
-        super(nombre, apellidoP, apellidoM, CURP, direccion, edad, telefono);
+    public Administrador(String nombre, String apellidoP, String apellidoM, String CURP, String direccion, int edad, String telefono, char identificador){
+        super(nombre, apellidoP, apellidoM, CURP, direccion, edad, telefono, identificador);
     }
-    public Administrador(String nombre, String apellidoP, String apellidoM, String CURP, String direccion, int edad){
-        super(nombre, apellidoP, apellidoM, CURP, direccion, edad);
+    public Administrador(String nombre, String apellidoP, String apellidoM, String CURP, String direccion, int edad, char identificador){
+        super(nombre, apellidoP, apellidoM, CURP, direccion, edad, identificador);
     }
+
+    /* 
+        public String crearID(char identificador){
+        Random random = new Random();
+        int[][] intervalos = {{65,90}, {48,57}};
+        String id = "";
+        id += identificador;
+        for (int i = 0; i < 8; i++){
+            int iIntervalos = random.nextInt(intervalos.length);
+            id += (char)(random.nextInt((intervalos[iIntervalos][1])-(intervalos[iIntervalos][0]) + 1) + (intervalos[iIntervalos][0]));
+        }
+        return id;
+        }
+    */
 
        
 
