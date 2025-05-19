@@ -1,8 +1,19 @@
 public class Administrador extends Persona implements Configuracion { //Administrador es subclase de Persona e implementa la interface Configuracion
 
-    public Administrador(String nombre, String apellidoP, String apellidoM, String CURP, String direccion, int edad, int telefono){
+  
+
+    public Administrador(String nombre, String apellidoP, String apellidoM, String CURP, String direccion, int edad, String telefono){
         super(nombre, apellidoP, apellidoM, CURP, direccion, edad, telefono);
     }
+    public Administrador(String nombre, String apellidoP, String apellidoM, String CURP, String direccion, int edad){
+        super(nombre, apellidoP, apellidoM, CURP, direccion, edad);
+    }
+
+       
+
+
+
+
 
     @Override
     public void modificarNombre(String nombre){ //Metodo implementado de configuracion para modificar el nombre
@@ -13,7 +24,7 @@ public class Administrador extends Persona implements Configuracion { //Administ
         setEdad(edad);
     }
     @Override
-    public void modificarTelefono(int telefono){ //Metodo implementado de configuracion para modificar el telefono
+    public void modificarTelefono(String telefono){ //Metodo implementado de configuracion para modificar el telefono
         this.telefono = telefono;
     }
     @Override

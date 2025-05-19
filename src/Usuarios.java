@@ -1,10 +1,55 @@
-public class Usuarios extends Persona implements Configuracion{
-    public boolean permisos[];
+import java.util.List;
+import java.util.stream.Collectors;
 
-    public Usuarios(String nombre, String apellidoP, String apellidoM, String CURP, String direccion, int edad, int telefono){
+public class Usuarios extends Persona implements Configuracion{
+    public boolean permisos[] = {false,false,false,false};
+    int tipoUsuario;
+    public Usuarios(String nombre, String apellidoP, String apellidoM, String CURP, String direccion, int edad, String telefono){
         super(nombre, apellidoP, apellidoM, CURP, direccion, edad, telefono);
+        if (edad<18){
+            tipoUsuario=0;
+            permisos[Permisos.ENTRAR.indice] = true;
+            permisos[Permisos.SALIR.indice] = true;
+            Logs.agregarUsuario(this);
+            
+        } else{
+            tipoUsuario=1;
+            permisos[Permisos.ENTRAR.indice] = true;
+            permisos[Permisos.SALIR.indice] = true;
+            permisos[Permisos.CREAR_INVITADO.indice] = true;
+            permisos[Permisos.BORRAR_INVITADO.indice] = true;
+            Logs.agregarUsuario(this);
+            }
+        }
+         public Usuarios(String nombre, String apellidoP, String apellidoM, String CURP, String direccion, int edad){
+        super(nombre, apellidoP, apellidoM, CURP, direccion, edad);
+        if (edad<18){
+            tipoUsuario=0;
+            permisos[Permisos.ENTRAR.indice] = true;
+            permisos[Permisos.SALIR.indice] = true;
+            Logs.agregarUsuario(this);
+            
+        } else{
+            tipoUsuario=1;
+            permisos[Permisos.ENTRAR.indice] = true;
+            permisos[Permisos.SALIR.indice] = true;
+            permisos[Permisos.CREAR_INVITADO.indice] = true;
+            permisos[Permisos.BORRAR_INVITADO.indice] = true;
+            Logs.agregarUsuario(this);
+        }
     }
     
+    public static boolean verificarAcceso(String id, String key1, String key2, int proceso){
+       try{
+           List<Usuarios> u1 = Logs.listaUsuarios.stream().filter(n -> n.id == id).collect(Collectors.toList());  
+           Usuarios info = u1.get(0);
+           if (info.getKey1() == key1 && info.getKey2()==key2 && info.permisos[proceso]==true) {
+                return true;
+           } else return false;
+       } catch (Exception e) {
+            return false;
+       }
+    }
     public boolean verificarPermiso(int id){
         return permisos[id];
     }
@@ -17,7 +62,7 @@ public class Usuarios extends Persona implements Configuracion{
         setEdad(edad);
     }
     @Override
-    public void modificarTelefono(int telefono){ //Metodo implementado de configuracion para modificar el telefono
+    public void modificarTelefono(String telefono){ //Metodo implementado de configuracion para modificar el telefono
         this.telefono = telefono;
     }
     @Override
@@ -30,6 +75,7 @@ public class Usuarios extends Persona implements Configuracion{
     }
     @Override
     public void agregarUsuario(){ //Metodo abstracto heredado de Persona
-
+        
     }
+
 }
