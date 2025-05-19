@@ -6,6 +6,9 @@ public class Usuarios extends Persona implements Configuracion{
     int tipoUsuario;
     public Usuarios(String nombre, String apellidoP, String apellidoM, String CURP, String direccion, int edad, String telefono){
         super(nombre, apellidoP, apellidoM, CURP, direccion, edad, telefono);
+        id="1";
+        setKey1("123");
+        setKey2("456");
         if (edad<18){
             tipoUsuario=0;
             permisos[Permisos.ENTRAR.indice] = true;
@@ -39,11 +42,11 @@ public class Usuarios extends Persona implements Configuracion{
         }
     }
     
-    public static boolean verificarAcceso(String id, String key1, String key2, int proceso){
+    public static boolean verificarAcceso(String id, String key1, String key2){
        try{
-           List<Usuarios> u1 = Logs.listaUsuarios.stream().filter(n -> n.id == id).collect(Collectors.toList());  
+           List<Usuarios> u1 = Logs.listaUsuarios.stream().filter(n -> n.id.equals(id)).collect(Collectors.toList());  
            Usuarios info = u1.get(0);
-           if (info.getKey1() == key1 && info.getKey2()==key2 && info.permisos[proceso]==true) {
+           if (info.getKey1() == key1 && info.getKey2()==key2) {
                 return true;
            } else return false;
        } catch (Exception e) {

@@ -22,7 +22,6 @@ public class Server {
                     System.out.println(i);
         }
     }
-
     public void run() throws IOException{
         while (true){
             socket = server.accept();
@@ -42,6 +41,7 @@ public class Server {
                     line = in.readUTF();
                     
                     String parametros[]=line.split(",");
+                    
                     switch (parametros[0]){
                         case "A":
                             //caso para administrador
@@ -50,8 +50,8 @@ public class Server {
                             //caso para propietario
                             break;
                         case "U":
-                            if (Usuarios.verificarAcceso(parametros[1],parametros[2],parametros[3], Integer.parseInt(parametros[4]))){
-                                responseToClient = "Acceso aceptado";
+                            if (Usuarios.verificarAcceso(parametros[1],parametros[2],parametros[3])){
+                               responseToClient = "Acceso aceptado";
                             } else {
                                 responseToClient= "Acceso denegado, usuario o contraseñas incorrectas";
                             }
