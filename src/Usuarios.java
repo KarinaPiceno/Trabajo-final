@@ -25,6 +25,7 @@ public class Usuarios extends Persona implements Configuracion{
             Logs.agregarUsuario(this);
             }
         }
+
     public Usuarios(String nombre, String apellidoP, String apellidoM, String CURP, String direccion, int edad){
         super(nombre, apellidoP, apellidoM, CURP, direccion, edad, 'u');
         if (edad<18){
@@ -41,6 +42,11 @@ public class Usuarios extends Persona implements Configuracion{
             permisos[Permisos.BORRAR_INVITADO.indice] = true;
             Logs.agregarUsuario(this);
         }
+    }
+    public boolean inicioSesion(String parametros[]){
+        if (getKey1().equals(parametros[ProtocoloServer.KEY_1.indice])&&getKey2().equals(parametros[ProtocoloServer.KEY_2.indice])){
+            return true;
+        } else return false;
     }
     
     public boolean verificarAcceso(String parametros[]){
