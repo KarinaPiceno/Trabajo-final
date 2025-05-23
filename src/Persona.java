@@ -66,15 +66,7 @@ public abstract class Persona {
         Persona persona = (Persona) obj;
         return this.id == persona.id;
     }
-    public static String buscarUsuario (String parametros[]){
-        long hayUsuario = Logs.listaAdministradores.stream().filter(n->(n.nombre.equals(parametros[1])||n.id.equals(parametros[1]))&&(n.getKey1().equals(parametros[2])||n.getKey2().equals(parametros[2]))).count();
-        hayUsuario += Logs.listaUsuarios.stream().filter(n->(n.nombre.equals(parametros[1])||n.id.equals(parametros[1]))&&(n.getKey1().equals(parametros[2])||n.getKey2().equals(parametros[2]))).count();
-        hayUsuario += Logs.listaPropietarios.stream().filter(n->(n.nombre.equals(parametros[1])||n.id.equals(parametros[1]))&&(n.getKey1().equals(parametros[2])||n.getKey2().equals(parametros[2]))).count();
-        if (hayUsuario>0){
-            System.out.println(true);
-            return "true";
-        } else return "false";
-    }
+   
     public abstract String agregarInvitado(String parameetros[]);
     public abstract void borrarInvitado(String parameetros[]);
     public abstract void agregarUsuario(String parameetros[]);

@@ -6,7 +6,7 @@ public class Usuarios extends Persona implements Configuracion{
     int tipoUsuario;
     public Usuarios(String nombre, String apellidoP, String apellidoM, String CURP, String direccion, int edad, String telefono){
         super(nombre, apellidoP, apellidoM, CURP, direccion, edad, telefono, 'u');
-        id="1";
+        System.out.println(id);
         setKey1("123");
         setKey2("456");
         if (edad<18){

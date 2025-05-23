@@ -41,6 +41,9 @@ public class MenuPrincipal implements ActionListener{
     }
     @Override
     public void actionPerformed(ActionEvent e) {
+        if (e.getSource() == acciones){
+            
+        }
     }
 
 }

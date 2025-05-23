@@ -14,6 +14,7 @@ import javax.swing.JTextField;
 import javax.swing.WindowConstants;
 
 public class InicioSesion implements ActionListener {
+    String id;
     JButton bAceptar;
     public JFrame marco1;
     JTextField inUsuario;
@@ -74,6 +75,7 @@ public class InicioSesion implements ActionListener {
         }
         public String getText (ActionEvent e){
              if (e.getSource() == bAceptar){
+                id = inUsuario.getText().trim();
                return "i,"+inUsuario.getText().trim()+","+inContraseña.getText().trim();
             } else return "";
         }
@@ -90,7 +92,7 @@ public class InicioSesion implements ActionListener {
                 //System.out.println(getText(e));
                 marco1.setVisible(false);
                 System.out.println(respuesta);
-                ServerCliente cliente = new ServerCliente("192.168.100.9", 5000);
+                ServerCliente cliente = new ServerCliente("172.16.10.190", 5000);
             }
         }
     }

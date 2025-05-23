@@ -81,8 +81,8 @@ public class Server {
                             }
                             break;
                             case "i":
-                                //boolean respuesta=Persona.buscarUsuario(parametros);
                                 responseToClient = Persona.buscarUsuario(parametros);
+                                
                                 out.writeUTF(responseToClient);
                                 responseToClient = "Over";
                                 break;
