@@ -73,8 +73,8 @@ public abstract class Persona {
         return this.id == persona.id;
     }
 
-    public abstract void agregarInvitado();
-    public abstract void agregarUsuario();
+    public abstract Invitado agregarInvitado(String nombre, String apellidoP, String apellidoM, int diasMax);
+    public abstract Usuarios agregarUsuario(String nombre, String apellidoP, String apellidoM, String CURP, String direccion, int edad, String telefono, char identificador);
 
 
 

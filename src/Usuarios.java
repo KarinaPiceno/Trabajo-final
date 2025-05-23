@@ -70,12 +70,11 @@ public class Usuarios extends Persona implements Configuracion{
         setDireccion(direccion);
     }
     @Override
-    public void agregarInvitado(){ //Metodo abstracto heredado de Persona
-        
+    public Invitado agregarInvitado(String nombre, String apellidoP, String apellidoM, int diasMax){ //Metodo abstracto heredado de Persona
+        return new Invitado(nombre, apellidoP, apellidoM, diasMax);
     }
     @Override
-    public void agregarUsuario(){ //Metodo abstracto heredado de Persona
-        
+    public Usuarios agregarUsuario(String nombre, String apellidoP, String apellidoM, String CURP, String direccion, int edad, String telefono, char identificador){ //Metodo abstracto heredado de Persona
+        return new Usuarios(nombre, apellidoP, apellidoM, CURP, direccion, edad, identificador);
     }
-
 }
