@@ -12,7 +12,13 @@ public class Logs{
     public static List<UsuarioMax> listaPropietarios = new ArrayList<>();
     public static List<Administrador> listaAdministradores = new ArrayList<>();
     public static List<Usuarios> listaUsuarios = new ArrayList<>();
+    public static List<Invitado> listaInvitados = new ArrayList<>();
 
+    public static void mostrarInvitados (){
+        for (Invitado i: listaInvitados){
+            System.out.println(i.getNombre());
+        }
+    }
     public static void mostrarUsuarios(){
         for (Usuarios u : listaUsuarios){
             System.out.println(u.nombre);

@@ -3,10 +3,10 @@ public class Administrador extends Persona implements Configuracion { //Administ
   
 
     public Administrador(String nombre, String apellidoP, String apellidoM, String CURP, String direccion, int edad, String telefono){
-        super(nombre, apellidoP, apellidoM, CURP, direccion, edad, telefono);
+        super(nombre, apellidoP, apellidoM, CURP, direccion, edad, telefono,'a');
     }
     public Administrador(String nombre, String apellidoP, String apellidoM, String CURP, String direccion, int edad){
-        super(nombre, apellidoP, apellidoM, CURP, direccion, edad);
+        super(nombre, apellidoP, apellidoM, CURP, direccion, edad, 'a');
     }
 
        

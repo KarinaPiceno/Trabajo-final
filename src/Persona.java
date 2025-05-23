@@ -1,4 +1,18 @@
+import java.util.Random;
+
 public abstract class Persona {
+
+    public final String crearID(char identificador){
+        Random random = new Random();
+        int[][] intervalos = {{65,90}, {48,57}};
+        String id = "";
+        id += identificador;
+        for (int i = 0; i < 8; i++){
+            int iIntervalos = random.nextInt(intervalos.length);
+            id += (char)(random.nextInt((intervalos[iIntervalos][1])-(intervalos[iIntervalos][0]) + 1) + (intervalos[iIntervalos][0]));
+        }
+        return id;
+    }
     //atributos de nuestra clase abstracta
     public String nombre; 
     public String apellidoP; 
@@ -12,21 +26,20 @@ public abstract class Persona {
     private String CURP;
 
     //constructor con nombre, apellido paterno, apellido materno, CURP, direccion y edad
-    public Persona(String nombre, String apellidoP, String apellidoM, String CURP, String direccion, int edad){
+    public Persona(String nombre, String apellidoP, String apellidoM, String CURP, String direccion, int edad, char identificador){
         this.nombre = nombre;
         this.apellidoP = apellidoP;
         this.apellidoM = apellidoM;
         this.CURP = CURP;
         this.direccion = direccion;
         this.edad = edad;
-        // Se genera la id de manera secuencial: se incrementa ultimoId y se asigna a id.
-        //this.id = Logs.getNusuarios();
-        //Logs.setnUsuarios(++id);
+        this.id = crearID(identificador);
+        
         }
 
 
     //constructor con nombre, apellido paterno, apellido materno, CURP, direccion, edad y telefono
-    public Persona (String nombre, String apellidoP, String apellidoM, String CURP, String direccion, int edad, String telefono){
+    public Persona (String nombre, String apellidoP, String apellidoM, String CURP, String direccion, int edad, String telefono, char identificador){
         this.nombre = nombre;
         this.apellidoP = apellidoP;
         this.apellidoM = apellidoM;
@@ -34,9 +47,7 @@ public abstract class Persona {
         this.direccion = direccion;
         this.edad = edad;
         this.telefono = telefono;
-        // Se genera la id de manera secuencial: se incrementa ultimoId y se asigna a id.
-        //this.id = Logs.getNusuarios();
-        //Logs.setnUsuarios(++id);
+        this.id= crearID(identificador);
     }
 
     public String getNombreCompleto() {
@@ -55,9 +66,20 @@ public abstract class Persona {
         Persona persona = (Persona) obj;
         return this.id == persona.id;
     }
+    public static String buscarUsuario (String parametros[]){
+        long hayUsuario = Logs.listaAdministradores.stream().filter(n->(n.nombre.equals(parametros[1])||n.id.equals(parametros[1]))&&(n.getKey1().equals(parametros[2])||n.getKey2().equals(parametros[2]))).count();
+        hayUsuario += Logs.listaUsuarios.stream().filter(n->(n.nombre.equals(parametros[1])||n.id.equals(parametros[1]))&&(n.getKey1().equals(parametros[2])||n.getKey2().equals(parametros[2]))).count();
+        hayUsuario += Logs.listaPropietarios.stream().filter(n->(n.nombre.equals(parametros[1])||n.id.equals(parametros[1]))&&(n.getKey1().equals(parametros[2])||n.getKey2().equals(parametros[2]))).count();
+        if (hayUsuario>0){
+            System.out.println(true);
+            return "true";
+        } else return "false";
+    }
+    public abstract String agregarInvitado(String parameetros[]);
+    public abstract void borrarInvitado(String parameetros[]);
+    public abstract void agregarUsuario(String parameetros[]);
+    public abstract void borrarUsuario(String parameetros[]);
 
-    public abstract void agregarInvitado();
-    public abstract void agregarUsuario();
 
 
 

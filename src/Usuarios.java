@@ -2,10 +2,10 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class Usuarios extends Persona implements Configuracion{
-    public boolean permisos[] = {false,false,false,false};
+    public boolean permisos[] = {false,false,false,false,false,false};
     int tipoUsuario;
     public Usuarios(String nombre, String apellidoP, String apellidoM, String CURP, String direccion, int edad, String telefono){
-        super(nombre, apellidoP, apellidoM, CURP, direccion, edad, telefono);
+        super(nombre, apellidoP, apellidoM, CURP, direccion, edad, telefono, 'u');
         id="1";
         setKey1("123");
         setKey2("456");
@@ -21,11 +21,12 @@ public class Usuarios extends Persona implements Configuracion{
             permisos[Permisos.SALIR.indice] = true;
             permisos[Permisos.CREAR_INVITADO.indice] = true;
             permisos[Permisos.BORRAR_INVITADO.indice] = true;
+            
             Logs.agregarUsuario(this);
             }
         }
-         public Usuarios(String nombre, String apellidoP, String apellidoM, String CURP, String direccion, int edad){
-        super(nombre, apellidoP, apellidoM, CURP, direccion, edad);
+    public Usuarios(String nombre, String apellidoP, String apellidoM, String CURP, String direccion, int edad){
+        super(nombre, apellidoP, apellidoM, CURP, direccion, edad, 'u');
         if (edad<18){
             tipoUsuario=0;
             permisos[Permisos.ENTRAR.indice] = true;
@@ -42,16 +43,44 @@ public class Usuarios extends Persona implements Configuracion{
         }
     }
     
-    public static boolean verificarAcceso(String id, String key1, String key2){
+    public boolean verificarAcceso(String parametros[]){
        try{
-           List<Usuarios> u1 = Logs.listaUsuarios.stream().filter(n -> n.id.equals(id)).collect(Collectors.toList());  
-           Usuarios info = u1.get(0);
-           if (info.getKey1() == key1 && info.getKey2()==key2) {
+            /*String proceso= parametros[ProtocoloServer.PROCESO.indice];
+            String idC = parametros[ProtocoloServer.ID.indice];
+            String key1C= parametros[ProtocoloServer.KEY_1.indice];
+            String key2C =parametros[ProtocoloServer.KEY_2.indice];
+            */
+            if (this.getKey1() == parametros[ProtocoloServer.KEY_1.indice] && this.getKey2()== parametros[ProtocoloServer.KEY_2.indice] && this.id == parametros[ProtocoloServer.ID.indice] && permisos[Integer.parseInt(parametros[ProtocoloServer.PROCESO.indice])]) {
                 return true;
-           } else return false;
-       } catch (Exception e) {
+            } else return false;
+        } catch (Exception e) {
             return false;
-       }
+        }
+    }
+    public String agregarInvitado(String parametros[]){ //Metodo abstracto heredado de Persona
+        if (this.getKey1() == parametros[ProtocoloServer.KEY_1.indice] && this.getKey2()== parametros[ProtocoloServer.KEY_2.indice] && this.id == parametros[ProtocoloServer.ID.indice] && permisos[Integer.parseInt(parametros[ProtocoloServer.PROCESO.indice])]) {
+            Invitado i = new Invitado(parametros[5], parametros[6], parametros[7], Integer.parseInt(parametros[8]));
+            Logs.listaInvitados.add(i);
+            return "Invitado creado con exito\nContraseña para acceso de invitado: "+i.getKey(); 
+        }else return "Error, este usuario no tiene los permisos necesarios para agregar invitado o faltan datos de invitado";
+    }
+    public void agregarUsuario(String parametros[]){ //Metodo abstracto heredado de Persona
+        if (this.getKey1() == parametros[ProtocoloServer.KEY_1.indice] && this.getKey2()== parametros[ProtocoloServer.KEY_2.indice] && this.id == parametros[ProtocoloServer.ID.indice] && permisos[Integer.parseInt(parametros[ProtocoloServer.PROCESO.indice])]) {
+          
+        }
+    }
+    public void borrarInvitado(String parametros[]){
+        if (this.getKey1() == parametros[ProtocoloServer.KEY_1.indice] && this.getKey2()== parametros[ProtocoloServer.KEY_2.indice] && this.id == parametros[ProtocoloServer.ID.indice] && permisos[Integer.parseInt(parametros[ProtocoloServer.PROCESO.indice])]) {
+         int indexInvitado=Logs.listaInvitados.indexOf(Logs.listaInvitados.stream().filter(n-> n.getNombre()==parametros[5]).findFirst().get());
+         System.out.println(indexInvitado);
+         Logs.listaInvitados.remove(indexInvitado);
+        }
+    }
+    public void borrarUsuario(String parametros[]){
+
+    }
+    public String mostrarPermisos(){
+        return "Entrada: " + permisos[Permisos.ENTRAR.indice] + "\nSalida: " + permisos[Permisos.SALIR.indice] + "\nAgregar invitado: " + permisos[Permisos.CREAR_INVITADO.indice];
     }
     public boolean verificarPermiso(int id){
         return permisos[id];
@@ -71,14 +100,6 @@ public class Usuarios extends Persona implements Configuracion{
     @Override
     public void modificarDireccion(String direccion){ //Metodo implementado de configuracion para modificar la direccion
         setDireccion(direccion);
-    }
-    @Override
-    public void agregarInvitado(){ //Metodo abstracto heredado de Persona
-        
-    }
-    @Override
-    public void agregarUsuario(){ //Metodo abstracto heredado de Persona
-        
     }
 
 }

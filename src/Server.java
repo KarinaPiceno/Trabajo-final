@@ -1,4 +1,6 @@
 import java.net.*;
+import java.util.List;
+import java.util.stream.Collectors;
 import java.io.*;
 
 public class Server {
@@ -40,26 +42,54 @@ public class Server {
                 if (in.available() > 0) { // Check if client has sent something
                     line = in.readUTF();
                     
-                    String parametros[]=line.split(",");
+                    String parametros[]=line.trim().split(",");
                     
-                    switch (parametros[0]){
-                        case "A":
+                    switch (parametros[ProtocoloServer.T_USUARIO.indice]){
+                        case "a":
                             //caso para administrador
                             break;
-                        case "P":
+                        case "p":
                             //caso para propietario
                             break;
-                        case "U":
-                            if (Usuarios.verificarAcceso(parametros[1],parametros[2],parametros[3])){
-                               responseToClient = "Acceso aceptado";
-                            } else {
-                                responseToClient= "Acceso denegado, usuario o contraseñas incorrectas";
+                        case "u":
+                            List<Usuarios> u1 = Logs.listaUsuarios.stream().filter(n -> n.id.equals(parametros[ProtocoloServer.ID.indice])).collect(Collectors.toList());  
+                            Usuarios usuario = u1.get(0);
+                            switch (Integer.parseInt(parametros[ProtocoloServer.PROCESO.indice])){
+                                case 0: //caso de entrada
+                                    if (usuario.verificarAcceso(parametros)){
+                                        responseToClient = "Acceso aceptado";
+                                        Logs.newLogEntrada("Entrada, id de usuario: "+ parametros[ProtocoloServer.ID.indice]);
+                                    } else {
+                                        responseToClient= "Acceso denegado, usuario o contraseñas incorrectas";
+                                        Logs.newLogEntrada("Intento de entrada denegado");
+                                    }
+                                    break;
+                                case 1: //caso de salida
+                                    if (usuario.verificarAcceso(parametros)){
+                                        responseToClient = "Acceso aceptado";
+                                        Logs.newLogEntrada("Salida, id de usuario: "+ parametros[ProtocoloServer.ID.indice]);
+                                    } else {
+                                        responseToClient= "Acceso denegado, usuario o contraseñas incorrectas";
+                                        Logs.newLogEntrada("Intento de salida denegado");
+                                    }
+                                    break;
+                                case 3: //agregar invitado;
+                                    
+                                    break;
+                                default:
+
                             }
                             break;
+                            case "i":
+                                //boolean respuesta=Persona.buscarUsuario(parametros);
+                                responseToClient = Persona.buscarUsuario(parametros);
+                                out.writeUTF(responseToClient);
+                                responseToClient = "Over";
+                                break;
                         default:
-                            break;
                     }
-                    out.writeUTF(responseToClient);
+                            
+                    
                 }
 
             } catch(IOException i) {
